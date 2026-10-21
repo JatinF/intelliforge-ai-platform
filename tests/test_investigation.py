@@ -3,11 +3,11 @@
 import httpx
 from fastapi.testclient import TestClient
 
-from intelliforge.gateway.app import create_app
-from intelliforge.governance.auth import PlatformStore
-from intelliforge.investigate import investigate
-from intelliforge.knowledge.store import load_cases, retrieve
-from intelliforge.lora.trainer import train_and_compare
+from gateway.app import create_app
+from governance.auth import PlatformStore
+from gateway.investigate import investigate
+from knowledge.store import load_cases, retrieve
+from serving.local_lora import train_and_compare
 
 
 def _engineer(tenant: str = "tenant-a") -> dict:

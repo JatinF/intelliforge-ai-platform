@@ -9,7 +9,7 @@ import json
 import re
 from pathlib import Path
 
-from intelliforge.paths import dataset_dir
+from knowledge.paths import dataset_dir
 
 _TOKEN = re.compile(r"[a-z0-9][a-z0-9\-]*")
 

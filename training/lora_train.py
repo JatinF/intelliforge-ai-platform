@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from intelliforge.lora.trainer import save_adapter, train_and_compare
+from serving.local_lora import save_adapter, train_and_compare
 
 
 def main() -> None:

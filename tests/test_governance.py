@@ -2,8 +2,8 @@
 
 from fastapi.testclient import TestClient
 
-from intelliforge.gateway.app import create_app
-from intelliforge.governance.auth import can_decide
+from gateway.app import create_app
+from governance.auth import can_decide
 
 
 def test_apply_waits_for_a_different_approver_and_rereads_the_tool():

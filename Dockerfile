@@ -5,4 +5,4 @@ COPY . .
 RUN pip install --no-cache-dir .
 
 EXPOSE 8080
-CMD ["uvicorn", "intelliforge.gateway.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "gateway.app:create_app", "--factory", "--host", "0.0.0.0", "--port", "8080"]

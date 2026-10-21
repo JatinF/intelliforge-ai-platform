@@ -8,12 +8,12 @@ from __future__ import annotations
 
 import time
 
-from intelliforge.governance.auth import can_decide, can_diagnose, can_request_apply
-from intelliforge.knowledge.store import load_cases, load_documents, load_edges, retrieve, walk
-from intelliforge.lora.trainer import load_adapter, predict_label
-from intelliforge.routing.policy import choose_route
-from intelliforge.serving.cost import estimate_local_cost, whitespace_tokens
-from intelliforge.simulation.setpoint import recommend_flow
+from governance.auth import can_decide, can_diagnose, can_request_apply
+from knowledge.store import load_cases, load_documents, load_edges, retrieve, walk
+from serving.local_lora import load_adapter, predict_label
+from routing.policy import choose_route
+from serving.cost import estimate_local_cost, whitespace_tokens
+from simulation.setpoint import recommend_flow
 
 
 def case_by_id(case_id: str, tenant: str, cases: list[dict] | None = None) -> dict | None:

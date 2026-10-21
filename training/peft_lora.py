@@ -17,9 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from intelliforge.knowledge.store import load_cases
-from intelliforge.serving.preflight import assess_qwen_load, read_available_bytes
-from intelliforge.serving.remote import QWEN_MODEL
+from knowledge.store import load_cases
+from serving.preflight import assess_qwen_load, read_available_bytes
+from serving.remote import QWEN_MODEL
 
 OUTPUT = ROOT / "training" / "artifacts" / "qwen25_3b_lora"
 STEPS = 20

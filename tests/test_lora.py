@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from intelliforge.lora.trainer import train_and_compare
-from intelliforge.serving.quantize import adapter_reconstruction_error
+from serving.local_lora import train_and_compare
+from serving.quantize import adapter_reconstruction_error
 from training.compare_adapters import compare
 
 

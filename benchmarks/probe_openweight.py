@@ -24,9 +24,9 @@ if str(ROOT / "src") not in sys.path:
 from fastapi.testclient import TestClient
 
 from benchmarks.analyze_results import percentile
-from intelliforge.serving.openai_compat import create_openai_app
-from intelliforge.serving.preflight import assess_qwen_load, read_available_bytes
-from intelliforge.serving.remote import QWEN_MODEL, chat_completion
+from serving.openai_compat import create_openai_app
+from serving.preflight import assess_qwen_load, read_available_bytes
+from serving.remote import QWEN_MODEL, chat_completion
 
 
 def machine_spec() -> str:

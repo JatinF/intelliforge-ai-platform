@@ -12,11 +12,11 @@ import re
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel, ConfigDict
 
-from intelliforge.governance.auth import PlatformStore
-from intelliforge.investigate import investigate
-from intelliforge.serving.cost import whitespace_tokens
-from intelliforge.serving.preflight import assess_qwen_load, read_available_bytes
-from intelliforge.serving.remote import QWEN_MODEL
+from governance.auth import PlatformStore
+from gateway.investigate import investigate
+from serving.cost import whitespace_tokens
+from serving.preflight import assess_qwen_load, read_available_bytes
+from serving.remote import QWEN_MODEL
 
 CASE_ID = re.compile(r"SYN-CASE-[A-Z0-9]+")
 LOCAL_MODELS = {

@@ -21,16 +21,16 @@ flowchart TD
 
 | Piece | Where it lives | What this repository does with it |
 | --- | --- | --- |
-| Gateway | `src/intelliforge/gateway/app.py` | `/healthz`, investigations, approvals, audit reads |
-| Router | `src/intelliforge/routing/policy.py` | `quality`, `cost`, `open-weight`, `commercial` |
-| Local head | `src/intelliforge/lora/trainer.py` | Rank-2 LoRA trained with NumPy on a synthetic encoder |
-| Serving slots | `src/intelliforge/serving/remote.py` | vLLM `Qwen/Qwen2.5-3B-Instruct` and xAI `grok-4.7`. Both fail closed |
-| Replacement API | `src/intelliforge/serving/openai_compat.py` | `POST /v1/chat/completions`. The model field selects a local head. The Qwen id returns 503 |
+| Gateway | `src/gateway/app.py` | `/healthz`, investigations, approvals, audit reads |
+| Router | `src/routing/policy.py` | `quality`, `cost`, `open-weight`, `commercial` |
+| Local head | `src/serving/local_lora.py` | Rank-2 LoRA trained with NumPy on a synthetic encoder |
+| Serving slots | `src/serving/remote.py` | vLLM `Qwen/Qwen2.5-3B-Instruct` and xAI `grok-4.7`. Both fail closed |
+| Replacement API | `src/serving/openai_compat.py` | `POST /v1/chat/completions`. The model field selects a local head. The Qwen id returns 503 |
 | PEFT entry | `training/peft_lora.py` | Imports PEFT only after the memory preflight allows the Qwen weight load |
-| Quantization | `src/intelliforge/serving/quantize.py` | Int8 round-trip of the local matrices |
-| Knowledge | `datasets/synthetic_equipment/` | Tenant documents and a small graph. In-process overlap score |
-| Tool | `src/intelliforge/simulation/setpoint.py` | `scipy.optimize.minimize_scalar` on a typed loss |
-| Governance | `src/intelliforge/governance/auth.py` | Fixture tokens, role checks, a different approver for apply |
+| Quantization | `src/serving/quantize.py` | Int8 round-trip of the local matrices |
+| Knowledge | `src/knowledge/store.py` | Tenant documents and a three-hop graph loaded from `datasets/synthetic_equipment/` |
+| Tool | `src/simulation/setpoint.py` | `scipy.optimize.minimize_scalar` on a typed loss |
+| Governance | `src/governance/auth.py` | Fixture tokens, role checks, a different approver for apply |
 | Evaluation | `benchmarks/run_quality_eval.py` | Golden cases for the LoRA route and the baseline route |
 
 ## Target slots that were not executed

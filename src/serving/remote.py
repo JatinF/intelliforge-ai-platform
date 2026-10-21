@@ -9,7 +9,7 @@ import os
 
 import httpx
 
-from intelliforge.serving.cost import GROK_MODEL
+from serving.cost import GROK_MODEL
 
 QWEN_MODEL = "Qwen/Qwen2.5-3B-Instruct"
 XAI_CHAT_URL = "https://api.x.ai/v1/chat/completions"

@@ -5,9 +5,9 @@ from __future__ import annotations
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel, ConfigDict
 
-from intelliforge import __version__
-from intelliforge.governance.auth import PlatformStore
-from intelliforge.investigate import decide_approval, investigate
+from gateway import __version__
+from governance.auth import PlatformStore
+from gateway.investigate import decide_approval, investigate
 
 
 class InvestigateBody(BaseModel):

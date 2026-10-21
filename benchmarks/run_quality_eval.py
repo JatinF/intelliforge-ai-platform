@@ -13,11 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from intelliforge.evaluation.score import score_case, summarize
-from intelliforge.governance.auth import PlatformStore
-from intelliforge.investigate import investigate
-from intelliforge.knowledge.store import load_cases
-from intelliforge.lora.trainer import save_adapter, train_and_compare
+from evaluation.score import score_case, summarize
+from governance.auth import PlatformStore
+from gateway.investigate import investigate
+from knowledge.store import load_cases
+from serving.local_lora import save_adapter, train_and_compare
 
 
 def run() -> dict:

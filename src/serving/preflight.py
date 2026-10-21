@@ -10,7 +10,7 @@ from __future__ import annotations
 import ctypes
 import sys
 
-from intelliforge.serving.remote import QWEN_MODEL
+from serving.remote import QWEN_MODEL
 
 # https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct on 2026-10-21.
 # safetensors.parameters.BF16 and usedStorage.

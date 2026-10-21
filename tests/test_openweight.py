@@ -6,15 +6,15 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from intelliforge.routing.policy import choose_route
-from intelliforge.serving.openai_compat import LOCAL_MODELS, create_openai_app
-from intelliforge.serving.preflight import (
+from routing.policy import choose_route
+from serving.openai_compat import LOCAL_MODELS, create_openai_app
+from serving.preflight import (
     QWEN_PARAMETER_BYTES,
     QWEN_PARAMETER_COUNT,
     REQUIRED_AVAILABLE_BYTES,
     assess_qwen_load,
 )
-from intelliforge.serving.remote import QWEN_MODEL, chat_completion
+from serving.remote import QWEN_MODEL, chat_completion
 from training import peft_lora
 
 ROOT = Path(__file__).resolve().parents[1]

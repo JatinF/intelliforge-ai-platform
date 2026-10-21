@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from intelliforge.serving.cost import GROK_MODEL
-from intelliforge.serving.remote import QWEN_MODEL, vllm_base_url, xai_api_key
+from serving.cost import GROK_MODEL
+from serving.remote import QWEN_MODEL, vllm_base_url, xai_api_key
 
 POLICIES = ("quality", "cost", "open-weight", "commercial")
 

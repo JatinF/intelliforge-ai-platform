@@ -12,7 +12,7 @@ The default path is a CPU mock: a FastAPI gateway, tenant retrieval, a NumPy LoR
 
 | | |
 | --- | --- |
-| Package | `intelliforge` 0.1.0 |
+| Package | `intelliforge-ai-platform` 0.1.0 |
 | Gateway | FastAPI, tenant taken from the bearer token |
 | Local head | NumPy LoRA, rank 2, seed 7 |
 | Open-weight slot | `Qwen/Qwen2.5-3B-Instruct` through `POST /v1/chat/completions`. The weight load is refused on this machine |
@@ -110,7 +110,7 @@ The token rate counts whitespace tokens in the mock prompt and answer across tho
 
 `benchmarks/results/openweight_probe.json` records this workstation. Available physical memory was 2,324,750,336 bytes. The preflight requires the parameter bytes plus a 2 GiB resident-headroom assumption, so the weight load stayed `not-run`. `torch`, `transformers`, `peft`, and `vllm` were not installed. `nvidia-smi` and `docker` were absent. WSL reports `Ubuntu` `Stopped` `2`, and that distro was left stopped.
 
-The local stand-in in `src/intelliforge/serving/openai_compat.py` uses the same request shape. Over 20 in-process calls, the NumPy LoRA model `numpy-lora-r2-seed7` completed `SYN-CASE-001` with P95 4.644 ms. The baseline model `local-linear-w0-zeros` returned `STOPPED`. The Qwen model id returned HTTP 503.
+The local stand-in in `src/serving/openai_compat.py` uses the same request shape. Over 20 in-process calls, the NumPy LoRA model `numpy-lora-r2-seed7` completed `SYN-CASE-001` with P95 4.644 ms. The baseline model `local-linear-w0-zeros` returned `STOPPED`. The Qwen model id returned HTTP 503.
 
 ## Run the tests
 
@@ -121,7 +121,7 @@ python -m pip install -e ".[dev]"
 python benchmarks/run_latency_eval.py
 python benchmarks/probe_openweight.py
 python -m pytest
-uvicorn intelliforge.gateway.app:create_app --factory
+uvicorn gateway.app:create_app --factory
 ```
 
 `run_latency_eval.py` retrains the adapter, scores the qualification cases, times 100 local diagnoses, and rewrites `benchmarks/results/`. Pytest does not call AWS and does not call a model API. The workflow in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) installs the package on Ubuntu 24.04 and runs pytest.
@@ -144,11 +144,33 @@ Dev tokens are fixtures.
 ## Layout
 
 ```
-src/intelliforge/     gateway, routing, serving, governance, evaluation, knowledge, simulation, lora
-training/             lora_train.py, compare_adapters.py, adapter artifact
-benchmarks/           quality eval, latency eval, committed results
-datasets/synthetic_equipment/   cases, documents, graph
-infrastructure/       unapplied Terraform sketch
-docs/                 architecture, threats, method
-tests/
+intelliforge-ai-platform/
+├── README.md
+├── pyproject.toml
+├── docker-compose.yml
+├── src/
+│   ├── gateway/
+│   ├── routing/
+│   ├── serving/
+│   ├── governance/
+│   ├── evaluation/
+│   ├── knowledge/
+│   └── simulation/
+├── training/
+│   ├── lora_train.py
+│   └── compare_adapters.py
+├── benchmarks/
+│   ├── run_quality_eval.py
+│   ├── run_latency_eval.py
+│   └── results/
+├── datasets/
+│   └── synthetic_equipment/
+├── tests/
+├── infrastructure/
+└── docs/
+    ├── architecture.md
+    ├── threat-model.md
+    └── benchmark-methodology.md
 ```
+
+`src/serving/local_lora.py` is the NumPy head used by `training/lora_train.py`. `training/peft_lora.py` is the Qwen PEFT entry. `src/knowledge/paths.py` resolves the dataset directory and the adapter artifact.

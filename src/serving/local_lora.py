@@ -11,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-from intelliforge.paths import adapter_path
+from knowledge.paths import adapter_path
 
 CLASSES = ("normal", "cooling_flow_low", "pressure_leak")
 SEED = 7

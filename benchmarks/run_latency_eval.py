@@ -19,12 +19,12 @@ if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
 from benchmarks.analyze_results import percentile, render_markdown
-from intelliforge.evaluation.tracking import write_run
-from intelliforge.governance.auth import PlatformStore
-from intelliforge.investigate import investigate
-from intelliforge.lora.trainer import load_adapter
-from intelliforge.serving.cost import GROK_INPUT_USD_PER_1M, GROK_OUTPUT_USD_PER_1M, GROK_PRICE_SOURCE, LOCAL_MOCK_USD_PER_1K, PRICE_AS_OF
-from intelliforge.serving.quantize import adapter_reconstruction_error
+from evaluation.tracking import write_run
+from governance.auth import PlatformStore
+from gateway.investigate import investigate
+from serving.local_lora import load_adapter
+from serving.cost import GROK_INPUT_USD_PER_1M, GROK_OUTPUT_USD_PER_1M, GROK_PRICE_SOURCE, LOCAL_MOCK_USD_PER_1K, PRICE_AS_OF
+from serving.quantize import adapter_reconstruction_error
 import numpy as np
 
 
