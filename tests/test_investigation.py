@@ -75,6 +75,43 @@ def test_other_tenant_case_is_hidden():
     assert load_cases()[0]["tenant"] == "tenant-a"
 
 
+def test_chat_completions_runs_the_quality_workflow_on_the_gateway():
+    client = TestClient(create_app())
+    headers = {"Authorization": "Bearer dev-engineer-a"}
+    missing = client.post(
+        "/v1/chat/completions",
+        headers=headers,
+        json={
+            "model": "numpy-lora-r2-seed7",
+            "messages": [{"role": "user", "content": "Why is the chamber hot?"}],
+            "stream": False,
+        },
+    )
+    assert missing.status_code == 400
+    completed = client.post(
+        "/v1/chat/completions",
+        headers=headers,
+        json={
+            "model": "numpy-lora-r2-seed7",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "SYN-CASE-001\nCaller context is synthetic chamber telemetry.",
+                }
+            ],
+            "stream": False,
+        },
+    )
+    assert completed.status_code == 200
+    body = completed.json()
+    assert body["model"] == "numpy-lora-r2-seed7"
+    assert body["intelliforge"]["status"] == "COMPLETED"
+    assert body["intelliforge"]["fault_class"] == "cooling_flow_low"
+    assert body["intelliforge"]["setpoint_applied"] is False
+    assert body["intelliforge"]["remote_called"] is False
+    assert "The setpoint was not applied." in body["choices"][0]["message"]["content"]
+
+
 def test_gateway_rejects_an_injected_fault_and_reports_health():
     client = TestClient(create_app())
     health = client.get("/healthz")

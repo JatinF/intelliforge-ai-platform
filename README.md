@@ -128,6 +128,16 @@ uvicorn gateway.app:create_app --factory
 
 Docker Compose profiles `app`, `knowledge`, and `gpu` are in the tree. They were not part of the committed measurement. `local-demo-only` is a fixture password.
 
+## One local workflow
+
+The functioning path is the quality head on the main gateway. `POST /v1/chat/completions` with model `numpy-lora-r2-seed7` runs the same investigation as `POST /v1/investigations` when the user message contains a `SYN-CASE-` identifier. `SYN-CASE-001` is that workflow. The response cites the tenant document and states that the setpoint was not applied. A prompt without a case id returns 400. `Qwen/Qwen2.5-3B-Instruct` returns 503. The cost head `local-linear-w0-zeros` is the comparison route and stops when it disagrees with the document.
+
+```bash
+python benchmarks/run_local_workflow.py
+```
+
+The script writes [benchmarks/results/workflow_report.json](benchmarks/results/workflow_report.json). That run is in-process through the gateway app. It does not call vLLM or a hosted model. The committed result for `SYN-CASE-001` is status `COMPLETED`, fault class `cooling_flow_low`, `setpoint_applied` false, and `remote_called` false. Whitespace usage on that response is 9 prompt tokens and 35 completion tokens.
+
 ## API
 
 Dev tokens are fixtures.
@@ -139,7 +149,7 @@ Dev tokens are fixtures.
 | `dev-approver-a` | `tenant-a` | approver |
 | `dev-engineer-b` | `tenant-b` | engineer |
 
-`GET /healthz` reports `real_equipment: 0`. `POST /v1/investigations` with `{"case_id": "SYN-CASE-001"}` runs the quality route. `action` `apply_setpoint` returns `AWAITING_APPROVAL`. `POST /v1/approvals/{id}/decision` accepts `approve` or `reject`. A missing token returns 401. Another tenant's case returns 404.
+`GET /healthz` reports `real_equipment: 0`. `POST /v1/investigations` with `{"case_id": "SYN-CASE-001"}` runs the quality route. The same case is `POST /v1/chat/completions` with `{"model": "numpy-lora-r2-seed7", "messages": [{"role": "user", "content": "SYN-CASE-001"}], "stream": false}` and a bearer token. `action` `apply_setpoint` returns `AWAITING_APPROVAL`. `POST /v1/approvals/{id}/decision` accepts `approve` or `reject`. A missing token returns 401. Another tenant's case returns 404.
 
 ## Layout
 

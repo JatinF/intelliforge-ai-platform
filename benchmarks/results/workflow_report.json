@@ -1,0 +1,35 @@
+{
+  "workflow": "quality-chat-completions",
+  "deployment_decision": "NO-GO",
+  "real_equipment": 0,
+  "mode": "local-mock",
+  "machine": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "cpu_count": 8,
+    "python": "3.12.10"
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/chat/completions",
+    "model": "numpy-lora-r2-seed7",
+    "case_id": "SYN-CASE-001"
+  },
+  "status_code": 200,
+  "status": "COMPLETED",
+  "fault_class": "cooling_flow_low",
+  "model_version": "numpy-lora-r2-seed7",
+  "setpoint_applied": false,
+  "remote_called": false,
+  "answer": "Process SYN-PROC-ETCH-01 fault class is cooling_flow_low. Evidence: SYN-DOC-COOLING. Relationships: SYN-PROC-ETCH-01 USES SYN-TOOL-01, SYN-TOOL-01 HAS_CHAMBER SYN-CHAMBER-A, SYN-CHAMBER-A HAS_SENSOR SYN-SENSOR-TEMP, SYN-CHAMBER-A HAS_SENSOR SYN-SENSOR-PRESSURE, SYN-CHAMBER-A HAS_VALVE SYN-VALVE-C1. Recommended coolant flow fraction is 1.0000. The setpoint was not applied.",
+  "usage": {
+    "prompt_tokens": 9,
+    "completion_tokens": 35,
+    "total_tokens": 44
+  },
+  "gates": {
+    "vllm-qwen": "not-run",
+    "hosted-commercial-model": "not-run",
+    "qwen-weight-load": "not-run"
+  }
+}

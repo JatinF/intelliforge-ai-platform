@@ -21,11 +21,11 @@ flowchart TD
 
 | Piece | Where it lives | What this repository does with it |
 | --- | --- | --- |
-| Gateway | `src/gateway/app.py` | `/healthz`, investigations, approvals, audit reads |
+| Gateway | `src/gateway/app.py` | `/healthz`, investigations, approvals, audit reads, and `POST /v1/chat/completions` |
 | Router | `src/routing/policy.py` | `quality`, `cost`, `open-weight`, `commercial` |
 | Local head | `src/serving/local_lora.py` | Rank-2 LoRA trained with NumPy on a synthetic encoder |
 | Serving slots | `src/serving/remote.py` | vLLM `Qwen/Qwen2.5-3B-Instruct` and xAI `grok-4.7`. Both fail closed |
-| Replacement API | `src/serving/openai_compat.py` | `POST /v1/chat/completions`. The model field selects a local head. The Qwen id returns 503 |
+| Replacement API | `src/serving/openai_compat.py` | Registered on the main gateway. `numpy-lora-r2-seed7` runs the quality investigation when the prompt contains a `SYN-CASE-` id. The Qwen id returns 503 |
 | PEFT entry | `training/peft_lora.py` | Imports PEFT only after the memory preflight allows the Qwen weight load |
 | Quantization | `src/serving/quantize.py` | Int8 round-trip of the local matrices |
 | Knowledge | `src/knowledge/store.py` | Tenant documents and a three-hop graph loaded from `datasets/synthetic_equipment/` |

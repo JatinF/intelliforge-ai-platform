@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict
 from gateway import __version__
 from governance.auth import PlatformStore
 from gateway.investigate import decide_approval, investigate
+from serving.openai_compat import register_chat_routes
 
 
 class InvestigateBody(BaseModel):
@@ -72,4 +73,5 @@ def create_app() -> FastAPI:
                 return record
         raise HTTPException(status_code=404, detail="audit not found")
 
+    register_chat_routes(app)
     return app

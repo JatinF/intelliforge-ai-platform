@@ -69,9 +69,8 @@ def completion_payload(model: str, content: str, prompt: str, record: dict | Non
     return body
 
 
-def create_openai_app(available_bytes: int | None = None) -> FastAPI:
-    app = FastAPI(title="IntelliForge OpenAI-compatible")
-    app.state.store = PlatformStore()
+def register_chat_routes(app: FastAPI, available_bytes: int | None = None) -> None:
+    """Serve the local quality and cost heads on POST /v1/chat/completions."""
 
     def _available() -> int:
         if available_bytes is None:
@@ -111,4 +110,9 @@ def create_openai_app(available_bytes: int | None = None) -> FastAPI:
             raise HTTPException(status_code=400, detail=str(exc)) from None
         return completion_payload(body.model, record["answer"], prompt, record)
 
+
+def create_openai_app(available_bytes: int | None = None) -> FastAPI:
+    app = FastAPI(title="IntelliForge OpenAI-compatible")
+    app.state.store = PlatformStore()
+    register_chat_routes(app, available_bytes=available_bytes)
     return app
