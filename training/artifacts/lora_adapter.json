@@ -1,0 +1,52 @@
+{
+  "format": "numpy-lora",
+  "seed": 7,
+  "rank": 2,
+  "alpha": 4.0,
+  "steps": 400,
+  "learning_rate": 0.8,
+  "classes": [
+    "normal",
+    "cooling_flow_low",
+    "pressure_leak"
+  ],
+  "A": [
+    [
+      -1.64978273,
+      1.24609517,
+      -0.43749513,
+      -0.06030832
+    ],
+    [
+      -0.88791056,
+      -1.33484863,
+      1.78873072,
+      0.00612542
+    ]
+  ],
+  "B": [
+    [
+      -1.42865604,
+      -0.76569609
+    ],
+    [
+      1.55279752,
+      -1.18071163
+    ],
+    [
+      -0.12414148,
+      1.94640771
+    ]
+  ],
+  "metrics": {
+    "train_loss_start": 1.098612,
+    "train_loss_end": 0.000206,
+    "baseline_heldout_accuracy": 0.333333,
+    "lora_heldout_accuracy": 1.0,
+    "baseline_prototype_accuracy": 0.333333,
+    "lora_prototype_accuracy": 1.0,
+    "heldout_examples": 30,
+    "train_examples": 90,
+    "peft_hf_train": "not-run"
+  }
+}

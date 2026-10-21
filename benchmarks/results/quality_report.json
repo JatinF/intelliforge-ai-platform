@@ -1,0 +1,94 @@
+{
+  "cases": 4,
+  "lora_task_completion_rate": 1.0,
+  "baseline_task_completion_rate": 0.25,
+  "lora_fault_accuracy": 1.0,
+  "baseline_fault_accuracy": 0.25,
+  "lora_rows": [
+    {
+      "case_id": "SYN-CASE-001",
+      "passed": true,
+      "fault_ok": true,
+      "evidence_ok": true,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": true
+    },
+    {
+      "case_id": "SYN-CASE-002",
+      "passed": true,
+      "fault_ok": true,
+      "evidence_ok": true,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": true
+    },
+    {
+      "case_id": "SYN-CASE-003",
+      "passed": true,
+      "fault_ok": true,
+      "evidence_ok": true,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": true
+    },
+    {
+      "case_id": "SYN-CASE-004",
+      "passed": true,
+      "fault_ok": true,
+      "evidence_ok": true,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": true
+    }
+  ],
+  "baseline_rows": [
+    {
+      "case_id": "SYN-CASE-001",
+      "passed": false,
+      "fault_ok": false,
+      "evidence_ok": false,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": false
+    },
+    {
+      "case_id": "SYN-CASE-002",
+      "passed": false,
+      "fault_ok": false,
+      "evidence_ok": false,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": false
+    },
+    {
+      "case_id": "SYN-CASE-003",
+      "passed": true,
+      "fault_ok": true,
+      "evidence_ok": true,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": true
+    },
+    {
+      "case_id": "SYN-CASE-004",
+      "passed": false,
+      "fault_ok": false,
+      "evidence_ok": false,
+      "relationships_ok": true,
+      "applied_ok": true,
+      "completed": false
+    }
+  ],
+  "lora_metrics": {
+    "train_loss_start": 1.098612,
+    "train_loss_end": 0.000206,
+    "baseline_heldout_accuracy": 0.333333,
+    "lora_heldout_accuracy": 1.0,
+    "baseline_prototype_accuracy": 0.333333,
+    "lora_prototype_accuracy": 1.0,
+    "heldout_examples": 30,
+    "train_examples": 90,
+    "peft_hf_train": "not-run"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "real_equipment": 0,
+  "documents": [
+    {
+      "id": "SYN-DOC-COOLING",
+      "tenant": "tenant-a",
+      "title": "Coolant flow and chamber temperature",
+      "fault_class": "cooling_flow_low",
+      "text": "Process SYN-PROC-ETCH-01 on tool SYN-TOOL-01. Abnormal chamber temperature with stable pressure indicates cooling_flow_low. Check coolant valve SYN-VALVE-C1 on chamber SYN-CHAMBER-A. Sensor SYN-SENSOR-TEMP reports the chamber temperature."
+    },
+    {
+      "id": "SYN-DOC-PRESSURE",
+      "tenant": "tenant-a",
+      "title": "Vacuum pressure drop",
+      "fault_class": "pressure_leak",
+      "text": "Process SYN-PROC-ETCH-02. A vacuum pressure drop with temperature near target indicates pressure_leak. Inspect the chamber seal and sensor SYN-SENSOR-PRESSURE."
+    },
+    {
+      "id": "SYN-DOC-NORMAL",
+      "tenant": "tenant-a",
+      "title": "Readings within target",
+      "fault_class": "normal",
+      "text": "Process SYN-PROC-ETCH-03 is within target. Stable readings and normal coolant flow do not indicate a fault."
+    },
+    {
+      "id": "SYN-DOC-OTHER",
+      "tenant": "tenant-b",
+      "title": "Other tenant cooling note",
+      "fault_class": "cooling_flow_low",
+      "text": "Process SYN-PROC-OTHER uses SYN-TOOL-99. A separate sentence mentions SYN-PROC-ETCH-01 abnormal chamber temperature so a missing tenant filter would leak it."
+    }
+  ]
+}

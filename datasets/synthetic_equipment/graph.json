@@ -1,0 +1,13 @@
+{
+  "real_equipment": 0,
+  "edges": [
+    {"tenant": "tenant-a", "source": "SYN-PROC-ETCH-01", "relation": "USES", "target": "SYN-TOOL-01"},
+    {"tenant": "tenant-a", "source": "SYN-PROC-ETCH-02", "relation": "USES", "target": "SYN-TOOL-01"},
+    {"tenant": "tenant-a", "source": "SYN-PROC-ETCH-03", "relation": "USES", "target": "SYN-TOOL-01"},
+    {"tenant": "tenant-a", "source": "SYN-TOOL-01", "relation": "HAS_CHAMBER", "target": "SYN-CHAMBER-A"},
+    {"tenant": "tenant-a", "source": "SYN-CHAMBER-A", "relation": "HAS_SENSOR", "target": "SYN-SENSOR-TEMP"},
+    {"tenant": "tenant-a", "source": "SYN-CHAMBER-A", "relation": "HAS_SENSOR", "target": "SYN-SENSOR-PRESSURE"},
+    {"tenant": "tenant-a", "source": "SYN-CHAMBER-A", "relation": "HAS_VALVE", "target": "SYN-VALVE-C1"},
+    {"tenant": "tenant-b", "source": "SYN-PROC-OTHER", "relation": "USES", "target": "SYN-TOOL-99"}
+  ]
+}

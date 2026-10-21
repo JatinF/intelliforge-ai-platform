@@ -1,0 +1,12 @@
+{
+  "tracking": "local-json",
+  "mlflow_client": "not-run",
+  "params": {
+    "route": "lora-local",
+    "iterations": 100
+  },
+  "metrics": {
+    "p95_ms": 2.667,
+    "lora_task_completion_rate": 1.0
+  }
+}

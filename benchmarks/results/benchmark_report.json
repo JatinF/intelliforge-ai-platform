@@ -1,0 +1,51 @@
+{
+  "deployment_decision": "NO-GO",
+  "real_equipment": 0,
+  "machine": "Windows 11 AMD64 processor=Intel64 Family 6 Model 140 Stepping 1, GenuineIntel cpu_count=8 python=3.12.10",
+  "lora": {
+    "lora_heldout_accuracy": 1.0,
+    "baseline_heldout_accuracy": 0.333333,
+    "lora_prototype_accuracy": 1.0,
+    "baseline_prototype_accuracy": 0.333333,
+    "train_loss_start": 1.098612,
+    "train_loss_end": 0.000206
+  },
+  "quality": {
+    "cases": 4,
+    "lora_task_completion_rate": 1.0,
+    "baseline_task_completion_rate": 0.25,
+    "lora_fault_accuracy": 1.0,
+    "baseline_fault_accuracy": 0.25
+  },
+  "latency": {
+    "iterations": 100,
+    "p95_ms": 2.667,
+    "tokens_per_second": 73436.525774
+  },
+  "quantization": {
+    "max_abs_error": 0.00665971
+  },
+  "cost": {
+    "mean_usd": 1.56e-05,
+    "usd_per_1k": 0.00015,
+    "as_of": "2026-10-21"
+  },
+  "commercial_list_price": {
+    "model": "grok-4.7",
+    "input_usd_per_1m": 2.0,
+    "output_usd_per_1m": 6.0,
+    "as_of": "2026-10-21",
+    "source": "https://docs.x.ai/docs/models",
+    "calls": 0
+  },
+  "gates": {
+    "vllm-qwen": "not-run",
+    "peft-hf-train": "not-run",
+    "bitsandbytes": "not-run",
+    "gpu-memory": "not-run",
+    "neo4j": "not-run",
+    "pgvector": "not-run",
+    "hosted-commercial-model": "not-run",
+    "mlflow-client": "not-run"
+  }
+}

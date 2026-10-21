@@ -1,0 +1,31 @@
+[project]
+name = "intelliforge-ai-platform"
+version = "0.1.0"
+description = "Model-agnostic AI platform for open-weight LLM serving, LoRA adaptation, model routing, reproducible evaluations, knowledge retrieval, governed agents, and inference cost optimization."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Jatinder Singh" }]
+dependencies = [
+  "fastapi==0.128.1",
+  "httpx==0.27.2",
+  "pydantic>=2",
+  "numpy",
+  "scipy",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+tracking = ["mlflow"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src", "."]

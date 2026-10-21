@@ -1,0 +1,26 @@
+{
+  "iterations": 100,
+  "p95_ms": 2.667,
+  "mean_ms": 1.39631,
+  "wall_clock_s": 0.141619,
+  "tokens_per_second": 73436.525774,
+  "tokenizer": "whitespace",
+  "mean_usd": 1.56e-05,
+  "quantization": {
+    "method": "numpy-int8",
+    "max_abs_error": 0.00665971047244085,
+    "bitsandbytes": "not-run"
+  },
+  "sample_latency_ms": [
+    1.188,
+    1.159,
+    1.144,
+    1.081,
+    1.133,
+    1.084,
+    1.103,
+    1.152,
+    3.213,
+    1.526
+  ]
+}
