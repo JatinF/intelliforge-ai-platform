@@ -8,3 +8,4 @@ venv/
 mlruns/
 .coverage
 htmlcov/
+training/artifacts/qwen25_3b_lora/

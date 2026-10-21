@@ -25,6 +25,8 @@ flowchart TD
 | Router | `src/intelliforge/routing/policy.py` | `quality`, `cost`, `open-weight`, `commercial` |
 | Local head | `src/intelliforge/lora/trainer.py` | Rank-2 LoRA trained with NumPy on a synthetic encoder |
 | Serving slots | `src/intelliforge/serving/remote.py` | vLLM `Qwen/Qwen2.5-3B-Instruct` and xAI `grok-4.7`. Both fail closed |
+| Replacement API | `src/intelliforge/serving/openai_compat.py` | `POST /v1/chat/completions`. The model field selects a local head. The Qwen id returns 503 |
+| PEFT entry | `training/peft_lora.py` | Imports PEFT only after the memory preflight allows the Qwen weight load |
 | Quantization | `src/intelliforge/serving/quantize.py` | Int8 round-trip of the local matrices |
 | Knowledge | `datasets/synthetic_equipment/` | Tenant documents and a small graph. In-process overlap score |
 | Tool | `src/intelliforge/simulation/setpoint.py` | `scipy.optimize.minimize_scalar` on a typed loss |
@@ -43,7 +45,7 @@ flowchart TD
 | Commercial model | `https://api.x.ai/v1/chat/completions`, model `grok-4.7` | `hosted-commercial-model` not-run |
 | Tracking server | MLflow | `mlflow-client` not-run. A local JSON record is written instead |
 
-`docker-compose.yml` defines the API, Postgres with pgvector, Neo4j, and a GPU-profile vLLM service. None of those services were started for the committed benchmark.
+`docker-compose.yml` defines the API, Postgres with pgvector, Neo4j, and a GPU-profile vLLM service. None of those services were started for the committed benchmark. The open-weight probe is `benchmarks/results/openweight_probe.json`. On this workstation the available physical memory was 2,324,750,336 bytes, and the Qwen2.5-3B BF16 parameter bytes are 6,171,877,376.
 
 ## Tenants and the maintenance story
 

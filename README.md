@@ -15,7 +15,7 @@ The default path is a CPU mock: a FastAPI gateway, tenant retrieval, a NumPy LoR
 | Package | `intelliforge` 0.1.0 |
 | Gateway | FastAPI, tenant taken from the bearer token |
 | Local head | NumPy LoRA, rank 2, seed 7 |
-| Open-weight slot | `Qwen/Qwen2.5-3B-Instruct` through an OpenAI-compatible vLLM URL. Unset URL stops the run |
+| Open-weight slot | `Qwen/Qwen2.5-3B-Instruct` through `POST /v1/chat/completions`. The weight load is refused on this machine |
 | Commercial slot | `grok-4.7` at `https://api.x.ai/v1/chat/completions`. Unset `XAI_API_KEY` stops the run |
 | Knowledge | In-process documents and graph. Neo4j and pgvector are compose profiles |
 | Tool | SciPy bounded scalar optimization |
@@ -104,6 +104,14 @@ The figures below are copied from that report. Machine line: Windows 11 AMD64, `
 
 The token rate counts whitespace tokens in the mock prompt and answer across those 100 calls. It is a local-mock figure.
 
+## Open-weight candidate
+
+`Qwen/Qwen2.5-3B-Instruct` is the open-weight model id. The Hugging Face model card on 2026-10-21 lists 3,085,938,688 BF16 parameters, which is 6,171,877,376 parameter bytes. Hugging Face PEFT is the trainer in `training/peft_lora.py`. vLLM is the intended server for that checkpoint because its API is the same `POST /v1/chat/completions` call.
+
+`benchmarks/results/openweight_probe.json` records this workstation. Available physical memory was 2,324,750,336 bytes. The preflight requires the parameter bytes plus a 2 GiB resident-headroom assumption, so the weight load stayed `not-run`. `torch`, `transformers`, `peft`, and `vllm` were not installed. `nvidia-smi` and `docker` were absent. WSL reports `Ubuntu` `Stopped` `2`, and that distro was left stopped.
+
+The local stand-in in `src/intelliforge/serving/openai_compat.py` uses the same request shape. Over 20 in-process calls, the NumPy LoRA model `numpy-lora-r2-seed7` completed `SYN-CASE-001` with P95 4.644 ms. The baseline model `local-linear-w0-zeros` returned `STOPPED`. The Qwen model id returned HTTP 503.
+
 ## Run the tests
 
 Python 3.12 or newer.
@@ -111,6 +119,7 @@ Python 3.12 or newer.
 ```bash
 python -m pip install -e ".[dev]"
 python benchmarks/run_latency_eval.py
+python benchmarks/probe_openweight.py
 python -m pytest
 uvicorn intelliforge.gateway.app:create_app --factory
 ```

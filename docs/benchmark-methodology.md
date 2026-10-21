@@ -25,12 +25,17 @@ Qwen weight loading, vLLM, Hugging Face PEFT, bitsandbytes, GPU memory, Neo4j, p
 
 `platform.system()`, `platform.release()`, `platform.machine()`, `platform.processor()`, `os.cpu_count()`, and `platform.python_version()`. The host name is omitted.
 
+## Open-weight probe
+
+`python benchmarks/probe_openweight.py` reads available physical memory and records `nvidia-smi`, `docker`, `wsl -l -v`, and whether `torch`, `transformers`, `peft`, and `vllm` import. It then sends 20 diagnose calls for `SYN-CASE-001` through the in-process OpenAI-compatible client, plus one baseline call and one Qwen call. The Qwen call is expected to return HTTP 503 while the preflight refuses the load. The parameter count is copied from `https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct` on 2026-10-21. `training/peft_lora.py` uses that same preflight and imports PEFT only after an allow decision.
+
 ## How to repeat
 
 ```bash
 python -m pip install -e ".[dev]"
 python benchmarks/run_quality_eval.py
 python benchmarks/run_latency_eval.py
+python benchmarks/probe_openweight.py
 python -m pytest
 ```
 

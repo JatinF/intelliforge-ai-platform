@@ -1,0 +1,49 @@
+{
+  "machine": "Windows 11 AMD64 processor=Intel64 Family 6 Model 140 Stepping 1, GenuineIntel cpu_count=8 python=3.12.10",
+  "preflight": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "parameter_count": 3085938688,
+    "parameter_dtype": "BF16",
+    "parameter_bytes": 6171877376,
+    "repo_used_storage_bytes": 6171926992,
+    "card_source": "https://huggingface.co/api/models/Qwen/Qwen2.5-3B-Instruct",
+    "card_as_of": "2026-10-21",
+    "card_evidence_class": "SPEC",
+    "resident_headroom_bytes": 2147483648,
+    "headroom_evidence_class": "ASSUMPTION",
+    "required_available_bytes": 8319361024,
+    "available_bytes": 2324750336,
+    "available_evidence_class": "MEASURED",
+    "decision": "refuse",
+    "qwen_weight_load": "not-run",
+    "reason": "available memory is below the BF16 weights plus the resident headroom"
+  },
+  "commands": {
+    "nvidia-smi": "absent",
+    "docker": "absent",
+    "wsl": "NAME STATE VERSION * Ubuntu Stopped 2"
+  },
+  "imports": {
+    "torch": "not-installed",
+    "transformers": "not-installed",
+    "peft": "not-installed",
+    "vllm": "not-installed"
+  },
+  "replacement": {
+    "iterations": 20,
+    "local_lora_p95_ms": 4.644,
+    "local_lora_status": "COMPLETED",
+    "local_lora_fault_class": "cooling_flow_low",
+    "baseline_status": "STOPPED",
+    "baseline_fault_class": null,
+    "qwen_http_status": 503,
+    "tokenizer": "whitespace",
+    "server": "in-process TestClient"
+  },
+  "gates": {
+    "vllm-qwen": "not-run",
+    "peft-hf-train": "not-run",
+    "qwen-weight-load": "not-run",
+    "gpu-memory": "not-run"
+  }
+}

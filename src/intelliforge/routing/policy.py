@@ -41,7 +41,7 @@ def choose_route(policy: str) -> dict:
             "route_id": "vllm-qwen",
             "model_version": QWEN_MODEL,
             "allowed": True,
-            "reason": "open-weight policy selected the vLLM endpoint",
+            "reason": "open-weight policy selected the OpenAI-compatible endpoint",
         }
     if not xai_api_key():
         return {

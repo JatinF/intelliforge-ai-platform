@@ -17,6 +17,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest"]
 tracking = ["mlflow"]
+openweight = ["torch", "transformers", "peft"]
 
 [build-system]
 requires = ["setuptools>=68"]
